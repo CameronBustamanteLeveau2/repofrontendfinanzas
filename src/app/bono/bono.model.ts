@@ -6,6 +6,7 @@ export interface Bono {
   diasPorAnio: number;
   capitalizacion: number;
   tasaInteresAnual: number;
+  tasaDescuentoAnual: number;
   impuestoRenta: number;
   fechaEmision: string | Date;
   prima: number;

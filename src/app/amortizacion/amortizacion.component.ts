@@ -60,6 +60,7 @@ export class AmortizacionComponent {
       diasPorAnio: [null, Validators.required],
       capitalizacion: [null, Validators.required],
       tasaInteresAnual: [null, Validators.required],
+      tasaDescuentoAnual: [null, Validators.required],
       impuestoRenta: [null, Validators.required],
       prima: [null, Validators.required],
       estructuracion: [null, Validators.required],
