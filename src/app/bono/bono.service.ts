@@ -4,8 +4,8 @@ import { Bono } from './bono.model';
 @Injectable({ providedIn: 'root' })
 export class BonoService {
   calcularDatos(bono: Bono) {
-    const frecuenciaCupon = bono.frecuenciaCupon; // en días, por ejemplo 180
-    const periodosPorAnio = bono.capitalizacion; // por ejemplo 6 si es bimestral
+    const frecuenciaCupon = bono.frecuenciaCupon; // en días (ej: 180)
+    const periodosPorAnio = bono.capitalizacion; // ej: 6 si es bimestral
     const totalPeriodos = bono.numeroAnios * periodosPorAnio;
     const diasCapitalizacion = bono.diasPorAnio / bono.capitalizacion;
 
@@ -13,10 +13,8 @@ export class BonoService {
     const tasaEfectivaAnual = bono.tasaInteresAnual / 100;
     const tasaEfectivaPeriodo = Math.pow(1 + tasaEfectivaAnual, 1 / periodosPorAnio) - 1;
 
-    // Tasa efectiva semestral según frecuencia del cupón
+    // Tasa efectiva según frecuencia de cupón
     const tasaEfectivaSemestral = Math.pow(1 + tasaEfectivaPeriodo, frecuenciaCupon / diasCapitalizacion) - 1;
-
-    const cokPeriodo = tasaEfectivaPeriodo;
 
     const costesInicialesEmisor = bono.estructuracion + bono.colocacion + bono.flotacion + bono.cavali;
     const costesInicialesBonista = bono.prima;
@@ -38,65 +36,42 @@ export class BonoService {
 
       const cupon = saldo * tasaEfectivaPeriodo;
       const escudo = cupon * bono.impuestoRenta / 100;
-      if (i <= bono.plazoGraciaTotal){
+
+      const prima = i === totalPeriodos ? bono.prima * saldo : 0;
+
+      // Determinar tipo de plazo de gracia
+      let plazoGracia = "S"; // Sin gracia por defecto
+      if (i <= bono.plazoGraciaTotal) {
+        plazoGracia = "T"; // Total
+      } else if (i > bono.plazoGraciaParcial && i <= bono.plazoGraciaTotal + bono.plazoGraciaParcial) {
+        plazoGracia = "P"; // Parcial
+      }
+
       tabla.push({
         fechaProgramada: fecha,
         inflacionAnual: bono.inflacionAnual,
         inflacionBimestral: bono.inflacionAnual / bono.capitalizacion,
-        plazoGracia: "T",
+        plazoGracia: plazoGracia,
         bonoIndexado: saldo,
-        cupon,
+        cupon: cupon,
         cuotaAmortizacion: cuotaAmort,
-        prima: bono.prima,
-        escudo,
+        prima: prima,
+        escudo: escudo,
         flujoEmisor: cuotaAmort + cupon,
         flujoEmisorEscudo: cuotaAmort + cupon - escudo,
-        flujoBonista: cuotaAmort + cupon + bono.prima,
+        flujoBonista: cuotaAmort + cupon + prima,
         flujoActualizado: 0,
         faPlazo: i,
         factorP: 1 / Math.pow(1 + tasaEfectivaPeriodo, i)
       });
+
+      // Actualizar saldo
+      if (plazoGracia === "S") {
+        saldo -= cuotaAmort;
+      } else if (plazoGracia === "T") {
         saldo += cupon;
       }
-      if (i > bono.plazoGraciaParcial && i <= bono.plazoGraciaTotal+bono.plazoGraciaParcial ){
-        tabla.push({
-          fechaProgramada: fecha,
-          inflacionAnual: bono.inflacionAnual,
-          inflacionBimestral: bono.inflacionAnual / bono.capitalizacion,
-          plazoGracia: "P",
-          bonoIndexado: saldo,
-          cupon,
-          cuotaAmortizacion: cuotaAmort,
-          prima: bono.prima,
-          escudo,
-          flujoEmisor: cuotaAmort + cupon,
-          flujoEmisorEscudo: cuotaAmort + cupon - escudo,
-          flujoBonista: cuotaAmort + cupon + bono.prima,
-          flujoActualizado: 0,
-          faPlazo: i,
-          factorP: 1 / Math.pow(1 + tasaEfectivaPeriodo, i)
-        });
-      }else {
-        tabla.push({
-          fechaProgramada: fecha,
-          inflacionAnual: bono.inflacionAnual,
-          inflacionBimestral: bono.inflacionAnual / bono.capitalizacion,
-          plazoGracia: "S",
-          bonoIndexado: saldo,
-          cupon,
-          cuotaAmortizacion: cuotaAmort,
-          prima: bono.prima,
-          escudo,
-          flujoEmisor: cuotaAmort + cupon,
-          flujoEmisorEscudo: cuotaAmort + cupon - escudo,
-          flujoBonista: cuotaAmort + cupon + bono.prima,
-          flujoActualizado: 0,
-          faPlazo: i,
-          factorP: 1 / Math.pow(1 + tasaEfectivaPeriodo, i)
-        });
-        saldo -= cuotaAmort;
-      }
-
+      // Para Parcial puedes personalizar reglas si aplica
     }
 
     return {
