@@ -1,0 +1,59 @@
+/* 📌 Contenedor scrollable */
+.tabla-scroll {
+  overflow-x: auto;
+  width: 100%;
+}
+
+/* 📌 Ancho mínimo forzado */
+.tabla-scroll table {
+  min-width: 1200px;
+  border-collapse: collapse;
+}
+
+/* 📌 Encabezados */
+.tabla-scroll th {
+  background: #1976d2;
+  color: #fff;
+  text-align: center;
+  padding: 0.75rem 1rem;
+  white-space: nowrap;
+}
+
+.tabla-scroll td {
+  text-align: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  white-space: nowrap;
+}
+
+/* 📌 Hover */
+.tabla-scroll tr:hover td {
+  background: #f9f9f9;
+}
+
+/* 📌 Título decorado */
+mat-card > h3 {
+  font-family:'Roboto';
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #1976d2;
+}
+
+/* 📌 Scrollbar personalizado (opcional) */
+.tabla-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tabla-scroll::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.tabla-scroll::-webkit-scrollbar-thumb {
+  background: #1976d2;
+  border-radius: 4px;
+}
+
+.tabla-scroll::-webkit-scrollbar-thumb:hover {
+  background: #1565c0;
+}

@@ -1,0 +1,102 @@
+<mat-card>
+  <h3>Tabla de Flujo de Caja Detallada</h3>
+  <div class="tabla-scroll">
+    <table mat-table [dataSource]="tabla" class="mat-elevation-z8" multiTemplateDataRows>
+
+    <!-- Fecha Programada -->
+    <ng-container matColumnDef="fechaProgramada">
+      <th mat-header-cell *matHeaderCellDef>Fecha Programada</th>
+      <td mat-cell *matCellDef="let row">{{ row.fechaProgramada | date }}</td>
+    </ng-container>
+
+    <!-- Inflación Anual -->
+    <ng-container matColumnDef="inflacionAnual">
+      <th mat-header-cell *matHeaderCellDef>Inflación Anual (%)</th>
+      <td mat-cell *matCellDef="let row">{{ row.inflacionAnual | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Inflación Bimestral -->
+    <ng-container matColumnDef="inflacionBimestral">
+      <th mat-header-cell *matHeaderCellDef>Inflación Bimestral (%)</th>
+      <td mat-cell *matCellDef="let row">{{ row.inflacionBimestral | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Plazo de Gracia -->
+    <ng-container matColumnDef="plazoGracia">
+      <th mat-header-cell *matHeaderCellDef>Plazo Gracia</th>
+      <td mat-cell *matCellDef="let row">{{ row.plazoGracia }}</td>
+    </ng-container>
+
+    <!-- Bono Indexado -->
+    <ng-container matColumnDef="bonoIndexado">
+      <th mat-header-cell *matHeaderCellDef>Bono Indexado</th>
+      <td mat-cell *matCellDef="let row">{{ row.bonoIndexado | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Cupon -->
+    <ng-container matColumnDef="cupon">
+      <th mat-header-cell *matHeaderCellDef>Cupon</th>
+      <td mat-cell *matCellDef="let row">{{ row.cupon | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Cuota Amortización -->
+    <ng-container matColumnDef="cuotaAmortizacion">
+      <th mat-header-cell *matHeaderCellDef>Cuota Amortización</th>
+      <td mat-cell *matCellDef="let row">{{ row.cuotaAmortizacion | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Prima -->
+    <ng-container matColumnDef="prima">
+      <th mat-header-cell *matHeaderCellDef>Prima</th>
+      <td mat-cell *matCellDef="let row">{{ row.prima | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Escudo -->
+    <ng-container matColumnDef="escudo">
+      <th mat-header-cell *matHeaderCellDef>Escudo</th>
+      <td mat-cell *matCellDef="let row">{{ row.escudo | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Flujo Emisor -->
+    <ng-container matColumnDef="flujoEmisor">
+      <th mat-header-cell *matHeaderCellDef>Flujo Emisor</th>
+      <td mat-cell *matCellDef="let row">{{ row.flujoEmisor | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Flujo Emisor con Escudo -->
+    <ng-container matColumnDef="flujoEmisorEscudo">
+      <th mat-header-cell *matHeaderCellDef>Flujo Emisor c/Escudo</th>
+      <td mat-cell *matCellDef="let row">{{ row.flujoEmisorEscudo | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Flujo Bonista -->
+    <ng-container matColumnDef="flujoBonista">
+      <th mat-header-cell *matHeaderCellDef>Flujo Bonista</th>
+      <td mat-cell *matCellDef="let row">{{ row.flujoBonista | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Flujo Actualizado -->
+    <ng-container matColumnDef="flujoActualizado">
+      <th mat-header-cell *matHeaderCellDef>Flujo Actualizado</th>
+      <td mat-cell *matCellDef="let row">{{ row.flujoActualizado | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- FA x Plazo -->
+    <ng-container matColumnDef="faPlazo">
+      <th mat-header-cell *matHeaderCellDef>FA x Plazo</th>
+      <td mat-cell *matCellDef="let row">{{ row.faPlazo | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Factor P -->
+    <ng-container matColumnDef="factorP">
+      <th mat-header-cell *matHeaderCellDef>Factor p</th>
+      <td mat-cell *matCellDef="let row">{{ row.factorP | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Header and Rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+  </div>
+</mat-card>

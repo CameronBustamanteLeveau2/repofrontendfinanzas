@@ -1,0 +1,18 @@
+
+<div class="metodo-card">
+
+  <div class="info">
+    <h3>{{ metodo.nombre }}</h3>
+    <p>Tipo: {{ metodo.tipo }}</p>
+    <p [class.inactivo]="!metodo.activo">
+      Estado: {{ metodo.activo ? 'Activo' : 'Inactivo' }}
+    </p>
+  </div>
+  <div class="acciones">
+    <button (click)="onEditar()">Editar</button>
+    <button class="eliminar" (click)="onEliminar()">Eliminar</button>
+  </div>
+
+
+
+</div>

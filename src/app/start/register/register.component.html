@@ -1,0 +1,45 @@
+<div class="auth-container">
+  <!-- Imagen decorativa -->
+  <div class="image-side">
+  </div>
+
+  <!-- Formulario -->
+  <div class="form-side">
+    <div class="logo">
+      <img src="assets/Pasted%20Graphic.png" alt="Logo FinEdu" />
+      <h1><span class="brand">Fin</span><span class="edu">Edu</span></h1>
+    </div>
+
+    <div class="form-container">
+      <div class="tabs">
+        <button class="tab" [class.active]="tab === 'registro'" (click)="cambiarTab('registro')">Registrarse</button>
+        <button class="tab" [class.active]="tab === 'login'" (click)="cambiarTab('login')">Iniciar sesión</button>
+      </div>
+
+      <!-- Registro -->
+      <form *ngIf="tab === 'registro'" (ngSubmit)="registrar()">
+        <div class="input-group">
+          <input [(ngModel)]="nombre" name="nombre" type="text" placeholder="Nombre completo" required />
+        </div>
+        <div class="input-group">
+          <input [(ngModel)]="email" name="email" type="email" placeholder="Correo electrónico" required />
+        </div>
+        <div class="input-group">
+          <input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña segura" required />
+        </div>
+        <button type="submit" class="submit-btn">Crear cuenta</button>
+      </form>
+
+      <!-- Login -->
+      <form *ngIf="tab === 'login'" (ngSubmit)="iniciarSesion()">
+        <div class="input-group">
+          <input [(ngModel)]="email" name="loginEmail" type="email" placeholder="Correo electrónico" required />
+        </div>
+        <div class="input-group">
+          <input [(ngModel)]="password" name="loginPassword" type="password" placeholder="Contraseña" required />
+        </div>
+        <button type="submit" class="submit-btn">Ingresar</button>
+      </form>
+    </div>
+  </div>
+</div>

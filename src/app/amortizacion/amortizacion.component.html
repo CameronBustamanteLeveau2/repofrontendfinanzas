@@ -1,0 +1,132 @@
+<form [formGroup]="form" (ngSubmit)="calcular()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Datos del Bono</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <!-- DATOS DEL BONO -->
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Valor Nominal</mat-label>
+        <input matInput formControlName="valorNominal" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Valor Comercial</mat-label>
+        <input matInput formControlName="valorComercial" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Número de Años</mat-label>
+        <input matInput formControlName="numeroAnios" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Frecuencia del Cupón</mat-label>
+        <input matInput formControlName="frecuenciaCupon" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Días por Año</mat-label>
+        <input matInput formControlName="diasPorAnio" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Capitalización</mat-label>
+        <input matInput formControlName="capitalizacion" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Tasa de Interés Anual (%)</mat-label>
+        <input matInput formControlName="tasaInteresAnual" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Impuesto a la Renta (%)</mat-label>
+        <input matInput formControlName="impuestoRenta" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Fecha de Emisión</mat-label>
+        <input matInput formControlName="fechaEmision" type="date" required>
+      </mat-form-field>
+
+      <!-- COSTOS -->
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Prima (%)</mat-label>
+        <input matInput formControlName="prima" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Estructuración (%)</mat-label>
+        <input matInput formControlName="estructuracion" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Colocación (%)</mat-label>
+        <input matInput formControlName="colocacion" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Flotación (%)</mat-label>
+        <input matInput formControlName="flotacion" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>CAVALI (%)</mat-label>
+        <input matInput formControlName="cavali" type="number" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Inflación Anual (%)</mat-label>
+        <input matInput formControlName="inflacionAnual" type="number" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Plazo de Gracia</mat-label>
+        <input matInput formControlName="plazoGracia" type="number" required>
+      </mat-form-field>
+
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">
+        Calcular
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+
+<mat-card class="estructura-card" *ngIf="estructura">
+  <h3>Respecto de la Estructuración del Bono</h3>
+  <p>Frecuencia del cupón: {{ estructura.frecuenciaCupon }}</p>
+  <p>Días Capitalización: {{ estructura.diasCapitalizacion }}</p>
+  <p>Períodos por Año: {{ estructura.periodosPorAnio }}</p>
+  <p>Total Periodos: {{ estructura.totalPeriodos }}</p>
+  <p>Tasa Efectiva Anual: {{ estructura.tasaEfectivaAnual | percent }}</p>
+  <p>Tasa Efectiva Semestral: {{ estructura.tasaEfectivaSemestral | percent }}</p>
+  <p>COK Semestral: {{ estructura.cokSemestral | percent }}</p>
+  <p>Costes Iniciales Emisor: {{ estructura.costesInicialesEmisor }}</p>
+  <p>Costes Iniciales Bonista: {{ estructura.costesInicialesBonista }}</p>
+</mat-card>
+
+<mat-card class="precio-card" *ngIf="precioActual">
+  <h3>Respecto del Precio Actual y Utilidad</h3>
+  <p>Precio Actual: {{ precioActual.precioActual }}</p>
+  <p>Utilidad/Pérdida: {{ precioActual.utilidad }}</p>
+</mat-card>
+
+<mat-card class="ratios-card" *ngIf="ratios">
+  <h3>Ratios de Decisión</h3>
+  <p>Duración: {{ ratios.duracion }}</p>
+  <p>Convexidad: {{ ratios.convexidad }}</p>
+  <p>Duración Modificada: {{ ratios.duracionModificada }}</p>
+</mat-card>
+
+<app-tabla-flujo
+  *ngIf="tabla && tabla.length > 0"
+  [tabla]="tabla"
+  [displayedColumns]="displayedColumns"
+></app-tabla-flujo>

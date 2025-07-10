@@ -1,0 +1,159 @@
+/* Fondo general */
+body, :host {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f6f8;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenedor principal: imagen + formulario */
+.auth-container {
+  display: flex;
+  width: 90%;
+  max-width: 1000px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.image-side {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: url('https://gestion.pe/resizer/v2/A2HERG5ZVRDS5LYCXE7TRRPFFA.jpg?auth=8e5f33869f0a2719a003ad2d68b7bed22945d75743fb375742fe32c24d3942d5&width=630&height=355&quality=75&smart=true') center center / cover no-repeat;
+  overflow: hidden;
+}
+
+.image-side::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.2); /* Color y opacidad */
+}
+
+.image-side img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Formulario lateral */
+.form-side {
+  flex: 1;
+  padding: 60px 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  justify-content: center;
+}
+
+.logo img {
+  width: 60px;
+}
+
+.logo h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.brand {
+  color: #0db5ff;
+}
+
+.edu {
+  color: #17e6c3;
+}
+
+.form-container {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.tab {
+  flex: 1;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  padding: 12px 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab.active {
+  color: #0db5ff;
+  border-color: #0db5ff;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: border 0.3s;
+}
+
+input:focus {
+  border-color: #0db5ff;
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(to right, #00b0e6, #005ec4);
+}
+
+
+/* Responsivo: Ocultar imagen en móviles */
+@media (max-width: 768px) {
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .image-side {
+    display: none;
+  }
+
+  .form-side {
+    padding: 40px 20px;
+  }
+}

@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Molle&display=swap');
+.formulas {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.formulas h1 {
+  font-family: "Molle", cursive;
+  text-align: center;
+  font-weight: 500;
+  font-style: italic;
+  color: #333;
+}
+
+.formulas p {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.formula-box {
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background-color: #fff;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+}
+
+.formula-box ol {
+  margin: 0 0 1rem 1.5rem;
+}
+
+.formula-box li {
+  margin-bottom: 0.7rem;
+  font-size: 1rem;
+  color: #444;
+}
+
+.formula-box strong {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 1.1rem;
+  color: #000;
+}
+
+.leyenda {
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+}
+
+.leyenda p {
+  margin: 0 0 0.5rem;
+}
+
+.leyenda ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.leyenda li {
+  margin-bottom: 0.3rem;
+  color: #555;
+  font-size: 0.95rem;
+}

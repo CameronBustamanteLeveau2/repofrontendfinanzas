@@ -1,0 +1,74 @@
+<div class="container">
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Ingresa los datos del préstamo</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="calcularAmortizacion()" [formGroup]="form">
+      <!-- Capital -->
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Capital</mat-label>
+        <input matInput type="number" formControlName="capital" required>
+      </mat-form-field>
+
+      <!-- Plazo -->
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Plazo (meses)</mat-label>
+        <input matInput type="number" formControlName="plazo" required>
+      </mat-form-field>
+
+      <!-- Tasa de interés anual -->
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Tasa de interés anual (%)</mat-label>
+        <input matInput type="number" formControlName="tasaInteres" required>
+      </mat-form-field>
+
+      <!-- Botón de cálculo -->
+      <button class="btn"   type="submit">
+        Calcular
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<!-- Mostrar la fórmula y los resultados -->
+<mat-card *ngIf="tablaAmortizacion.length > 0" appearance="outlined">
+  <mat-card-header>
+    <h1>Tabla de Amortización</h1>
+  </mat-card-header>
+  <mat-card-content>
+    <p><strong>Fórmula usada:</strong> {{ formula }}</p> <!-- Mostrar fórmula aquí -->
+    <p><strong>Resultado:</strong> {{ resultado }}</p> <!-- Mostrar resultado aquí -->
+
+    <table mat-table [dataSource]="tablaAmortizacion">
+      <ng-container matColumnDef="periodo">
+        <th mat-header-cell *matHeaderCellDef>Periodo</th>
+        <td mat-cell *matCellDef="let row">{{ row.periodo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="amortizacion">
+        <th mat-header-cell *matHeaderCellDef>Amortización</th>
+        <td mat-cell *matCellDef="let row">{{ row.amortizacion | number: '1.2-2' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="intereses">
+        <th mat-header-cell *matHeaderCellDef>Intereses</th>
+        <td mat-cell *matCellDef="let row">{{ row.intereses | number: '1.2-2' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="cuotaTotal">
+        <th mat-header-cell *matHeaderCellDef>Cuota Total</th>
+        <td mat-cell *matCellDef="let row">{{ row.cuotaTotal | number: '1.2-2' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="saldoRestante">
+        <th mat-header-cell *matHeaderCellDef>Saldo Restante</th>
+        <td mat-cell *matCellDef="let row">{{ row.saldoRestante | number: '1.2-2' }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>
+</div>
