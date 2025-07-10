@@ -38,12 +38,12 @@ export class BonoService {
 
       const cupon = saldo * tasaEfectivaPeriodo;
       const escudo = cupon * bono.impuestoRenta / 100;
-
+      if (i <= bono.plazoGraciaTotal){
       tabla.push({
         fechaProgramada: fecha,
         inflacionAnual: bono.inflacionAnual,
         inflacionBimestral: bono.inflacionAnual / bono.capitalizacion,
-        plazoGracia: bono.plazoGracia,
+        plazoGracia: "T",
         bonoIndexado: saldo,
         cupon,
         cuotaAmortizacion: cuotaAmort,
@@ -56,8 +56,47 @@ export class BonoService {
         faPlazo: i,
         factorP: 1 / Math.pow(1 + tasaEfectivaPeriodo, i)
       });
+        saldo += cupon;
+      }
+      if (i > bono.plazoGraciaParcial && i <= bono.plazoGraciaTotal+bono.plazoGraciaParcial ){
+        tabla.push({
+          fechaProgramada: fecha,
+          inflacionAnual: bono.inflacionAnual,
+          inflacionBimestral: bono.inflacionAnual / bono.capitalizacion,
+          plazoGracia: "P",
+          bonoIndexado: saldo,
+          cupon,
+          cuotaAmortizacion: cuotaAmort,
+          prima: bono.prima,
+          escudo,
+          flujoEmisor: cuotaAmort + cupon,
+          flujoEmisorEscudo: cuotaAmort + cupon - escudo,
+          flujoBonista: cuotaAmort + cupon + bono.prima,
+          flujoActualizado: 0,
+          faPlazo: i,
+          factorP: 1 / Math.pow(1 + tasaEfectivaPeriodo, i)
+        });
+      }else {
+        tabla.push({
+          fechaProgramada: fecha,
+          inflacionAnual: bono.inflacionAnual,
+          inflacionBimestral: bono.inflacionAnual / bono.capitalizacion,
+          plazoGracia: "S",
+          bonoIndexado: saldo,
+          cupon,
+          cuotaAmortizacion: cuotaAmort,
+          prima: bono.prima,
+          escudo,
+          flujoEmisor: cuotaAmort + cupon,
+          flujoEmisorEscudo: cuotaAmort + cupon - escudo,
+          flujoBonista: cuotaAmort + cupon + bono.prima,
+          flujoActualizado: 0,
+          faPlazo: i,
+          factorP: 1 / Math.pow(1 + tasaEfectivaPeriodo, i)
+        });
+        saldo -= cuotaAmort;
+      }
 
-      saldo -= cuotaAmort;
     }
 
     return {

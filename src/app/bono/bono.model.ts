@@ -14,5 +14,6 @@ export interface Bono {
   flotacion: number;
   cavali: number;
   inflacionAnual: number;
-  plazoGracia: number;
+  plazoGraciaTotal: number;
+  plazoGraciaParcial: number;
 }

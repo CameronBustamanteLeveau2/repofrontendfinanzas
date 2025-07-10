@@ -67,7 +67,8 @@ export class AmortizacionComponent {
       flotacion: [null, Validators.required],
       cavali: [null, Validators.required],
       inflacionAnual: [null, Validators.required],
-      plazoGracia: [null, Validators.required],
+      plazoGraciaTotal: [null, Validators.required],
+      plazoGraciaParcial: [null, Validators.required],
     });
   }
 
